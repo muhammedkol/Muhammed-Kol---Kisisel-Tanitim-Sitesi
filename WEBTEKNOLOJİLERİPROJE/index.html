@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,20 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-	<!-- Font -->
-	<link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap" rel="stylesheet">
-	
 	<!-- Css -->
 	<link rel="stylesheet" href="style.css">
+
+    <!-- Custom JavaScript -->
+    <script>
+        function toggleMenu() {
+            var navbar = document.getElementById("navbarSupportedContent");
+            if (navbar.classList.contains("show")) {
+                navbar.classList.remove("show");
+            } else {
+                navbar.classList.add("show");
+            }
+        }
+    </script>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,45 +36,45 @@
             <a href="index.html" class="navbar-brand text-white">
                 Muhammed Kol
             </a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-					<span class="navbar-toggler-icon"><i class="fas fa-ellipsis-v"></i></span>
-				</button>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
+            <button class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
 				<ul class="navbar-nav ml-auto ">
 
-					<li class="nav-item">
-						<a href="index.html" class="nav-link active  text-white">
+					<li class="nav-item active">
+						<a href="index.html" class="nav-link text-white">
 	      				Ana Sayfa
 	      				</a></li>
 
 					<li class="nav-item">
-						<a href="hakkında.html" class="nav-link active  text-white">
+						<a href="hakkında.html" class="nav-link text-white">
 	      				Hakkında
 	      				</a></li>
 
 	      			<li class="nav-item">
-						<a href="ozgecmis.html" class="nav-link active  text-white">
+						<a href="ozgecmis.html" class="nav-link text-white">
 	      				Özgeçmiş
 	      				</a></li>	
 
 					<li class="nav-item">
-						<a href="#" class="nav-link active  text-white">
+						<a href="#" class="nav-link text-white">
 	      				Şehrim
 	      				</a></li>
 
 	      			<li class="nav-item">
-						<a href="#" class="nav-link active  text-white">
+						<a href="#" class="nav-link text-white">
 	      				Takımımız
 	      				</a></li>
 
 	      			<li class="nav-item">
-						<a href="#" class="nav-link active  text-white">
+						<a href="#" class="nav-link text-white">
                         Login
 	      				</a>
                     </li>	
                     
                     <li class="nav-item">
-						<a href="#" class="nav-link active  text-white">
+						<a href="#" class="nav-link text-white">
                         İletişim
 	      				</a>
                     </li>
@@ -78,6 +87,7 @@
             <div class="container">
                 <div class="row">
                 <div class="col-12 col-md-9">
+                    <br>
                     <h1 class="display-2 font-weight-bold">
                         HOŞGELDİNİZ
                         <br>
@@ -95,10 +105,14 @@
                 </div>
             </div>
         </div>
+        
     </header>
+    <br>
+    <br>
+    <br>
+    <div class="bg-secondary text-light jumbotron"></div>
     <footer class="py-5 bg-secondary text-white text-center fixed-bottom">
         Web Teknolojileri Projesi © Muhammed Emin Kol 2024
     </footer>
-    <!-- BOOTSTRAP -->
 </body>
 </html>
