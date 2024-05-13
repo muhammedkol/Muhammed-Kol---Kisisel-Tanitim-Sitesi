@@ -14,3 +14,8 @@ body{
     border-radius: 5px;
     transition: .8s;
 }
+#button{
+    background-image: url(cizgii.png);
+    height: 40px;
+    width: 50px;
+}

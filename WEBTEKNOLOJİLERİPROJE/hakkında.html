@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Custom JavaScript -->
+    <script>
+        function toggleMenu() {
+            var navbar = document.getElementById("navbarSupportedContent");
+            if (navbar.classList.contains("show")) {
+                navbar.classList.remove("show");
+            } else {
+                navbar.classList.add("show");
+            }
+        }
+
+        function searchMovie() {
+    var input = document.getElementById("movieInput").value;
+    if (input.trim() === "") {
+        return;
+    }
+    var apiKey = "36b19c9d";
+
+    var xhr = new XMLHttpRequest();
+    var apiUrl = 'http://www.omdbapi.com/?s=' + encodeURIComponent(input) + '&apikey=' + apiKey;
+    xhr.open('GET', apiUrl, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+                var movies = data.Search;
+                var suggestionsContainer = document.getElementById("suggestions");
+                suggestionsContainer.innerHTML = '';
+                if (movies) {
+                    movies.forEach(function(movie) {
+                        var suggestion = document.createElement("div");
+                        suggestion.textContent = movie.Title;
+                        suggestion.onclick = function() {
+                            document.getElementById("movieInput").value = movie.Title;
+                            suggestionsContainer.innerHTML = ''; 
+                            searchMovieDetails(movie.Title);
+                        };
+                        suggestionsContainer.appendChild(suggestion);
+                    });
+                } else {
+                    console.error('API isteği başarısız oldu');
+                }
+            } else {
+                console.error('API isteği başarısız oldu');
+            }
+        }
+    };
+    xhr.send();
+}
+
+function searchMovieDetails(movieTitle) {
+    var apiKey = "36b19c9d"; 
+    var xhr = new XMLHttpRequest();
+    var apiUrl = 'http://www.omdbapi.com/?t=' + encodeURIComponent(movieTitle) + '&apikey=' + apiKey;
+    xhr.open('GET', apiUrl, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var movieData = JSON.parse(xhr.responseText);
+                displayMovieDetails(movieData);
+            } else {
+                console.error('API isteği başarısız oldu');
+            }
+        }
+    };
+    xhr.send();
+}
+
+function displayMovieDetails(movieData) {
+    var movieDetailsContainer = document.getElementById("movieDetails");
+    movieDetailsContainer.innerHTML = ''; 
+    var title = document.createElement("h2");
+    title.textContent = movieData.Title;
+    var year = document.createElement("p");
+    year.textContent = "Yıl: " + movieData.Year;
+    var plot = document.createElement("p");
+    plot.textContent = "Konu: " + movieData.Plot;
+    var director = document.createElement("p");
+    director.textContent = "Yönetmen: " + movieData.Director;
+    movieDetailsContainer.appendChild(title);
+    movieDetailsContainer.appendChild(year);
+    movieDetailsContainer.appendChild(plot);
+    movieDetailsContainer.appendChild(director);
+}
+    </script>
+    <style>
+        .search-container {
+    display: flex; 
+    margin-bottom: 10px; 
+}
+
+#movieInput {
+    flex-grow: 1; 
+}
+
+.suggestion-container {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 200px; 
+    overflow-y: auto; 
+    margin-top: 0; 
+    margin-bottom: 0; 
+}
+
+.suggestion-container div {
+    border-bottom: 1px solid black; 
+    padding: 5px 0; 
+    cursor: pointer; 
+    color: black;
+}
+
+.suggestion-container div:hover {
+    background-color: #f0f0f0; 
+}
+    </style>
+ 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkında | Muhammed Kol</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-white ">
+    
+        <div class="container">
+
+            <a href="index.html" class="navbar-brand text-white">
+                Muhammed Kol
+            </a>
+            <button id="button" class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+				<ul class="navbar-nav ml-auto ">
+
+					<li class="nav-item">
+						<a href="index.html" class="nav-link text-white">
+	      				Ana Sayfa
+	      				</a></li>
+
+					<li class="nav-item active">
+						<a href="hakkında.html" class="nav-link text-white">
+	      				Hakkında
+	      				</a></li>
+
+	      			<li class="nav-item">
+						<a href="ozgecmis.html" class="nav-link text-white">
+	      				Özgeçmiş
+	      				</a></li>	
+
+					<li class="nav-item">
+						<a href="sehrim.html" class="nav-link text-white">
+	      				Şehrim
+	      				</a></li>
+
+	      			<li class="nav-item">
+						<a href="takımımız.html" class="nav-link text-white">
+	      				Takımımız
+	      				</a></li>
+
+	      			<li class="nav-item">
+						<a href="#" class="nav-link text-white">
+                        Login
+	      				</a>
+                    </li>	
+                    
+                    <li class="nav-item">
+						<a href="#" class="nav-link text-white">
+                        İletişim
+	      				</a>
+                    </li>
+				</ul>
+			</div>
+        </div>
+    </nav>
+    <header>
+        <div class="bg-secondary text-light jumbotron">
+            <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <br>
+                    <h1 class="display-4 font-weight-bold">
+                        HAKKINDA
+                        <br>
+                    </h1>
+                    <p class="lead my-3">
+                        <br>
+                        <i>Öncelikle Herkese Merhaba!<br>
+                        8 Ekim 2004 tarihinde Sakarya' da dünyaya geldim. Anne ve baba tarafım Trabzonlu oldugundan ben de Trabzonlu sayılırım. Benden 6 yaş büyük bir ablam var. Hep beraber yaşamaya çalışıyoruz.
+                        </i>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <br>
+                        <img class="align-items-center rounded" src="yakısıklı2.jpeg" height="270" >
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="row">
+                <div class="col-md-4">
+                    <br>
+                    <img class="align-items-center rounded" src="yakısıklı3.jpeg" height="180">
+                </div>
+                </div>
+                <div class="col-md-8">
+                    <br>
+                    <p class="lead my-1">
+                        <i>Biraz da hobilerimden bahsedeyim. Futbol oynamayı, izlemeyi ve yorumlamayı severim. Aynı zamanda oyun oynamaya, müzik dinlemeye, film izlemeye ve ılıman akşamlarda şortla yürüyüş yapmaya bayılırım.
+                        </i>
+                    </p>
+                    <i><p class="lead my-1">Bu da <a href="https://open.spotify.com/user/31em67kbziectwaxgugung7q53li?si=761da79896c24a48">spotify linkim</a>.</p></i>
+                </div>
+            </div>
+        </div>
+        </div>
+    </header>
+    <div class="bg-secondary text-light jumbotron">
+        
+        <div class="container">
+            <div class="col-md">
+                <p><i>
+                    Film izlemeye bayıldığım için aşağı kısımda dilediğiniz film hakkında bilgi almanızı sağlayan bir arama kutusu koydum. (Az biraz İngilizce gerekebilir :))
+                </i></p>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <h1>Film Arama</h1>
+                    <div class="search-container">
+                        <input type="text" id="movieInput" placeholder="Film adı girin...">
+                        <button onclick="searchMovie()">Ara</button>
+                    </div>
+                    <div id="suggestionContainer" class="suggestion-container">
+                        <div id="suggestions"></div>
+                    </div>
+                    <div id="movieDetails" class="movie-details"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-secondary text-light jumbotron"></div>
+    <footer class="py-5 bg-secondary text-white text-center fixed-bottom">
+        Web Teknolojileri Projesi © Muhammed Emin Kol 2024
+    </footer>
+</body>
+</html>
